@@ -11,7 +11,7 @@
 
 ## Steps to install
 - Install docker
-- Start an Ubuntu 16,04 container
+- Start an Ubuntu 16.04 container
 - Install conda from https://docs.continuum.io/anaconda/. Put conda executable in the PATH
 - `conda update conda`
 - `conda init`
