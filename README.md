@@ -9,6 +9,24 @@
   <br><br>
 </p>
 
+## Steps to install
+- Install docker
+- Start an Ubuntu 16,04 container
+- Install conda from https://docs.continuum.io/anaconda/. Put conda executable in the PATH
+- `conda update conda`
+- `conda init`
+- Exit shell, reenter shell
+- `git clone https://github.com/andrei-radulescu-banu/SLM-Lab.git`
+- `cd SLM-Lab/`
+- `. /bin/setup`
+- `conda activate lab`
+- `pip install future`
+
+Then, the demo example will run:
+`python run_lab.py slm_lab/spec/demo.json dqn_cartpole dev`
+
+Note: You need Ubuntu 16.04. This will not work on Ubuntu 14.04, or 18.04. Nor on Centos 7.
+
 
 |||||
 |:---:|:---:|:---:|:---:|
