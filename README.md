@@ -18,7 +18,7 @@
 - Exit shell, reenter shell
 - `git clone https://github.com/andrei-radulescu-banu/SLM-Lab.git`
 - `cd SLM-Lab/`
-- `. /bin/setup`
+- `./bin/setup`
 - `conda activate lab`
 - `pip install future`
 
