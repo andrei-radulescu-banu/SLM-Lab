@@ -12,6 +12,9 @@
 ## Steps to install
 - Install docker
 - Start an Ubuntu 16.04 container
+```
+docker run -it --name ubuntu_16_04_slm_lab -e DISPLAY=${DISPLAY} -v /tmp/.X11-unix:/tmp/.X11-unix ubuntu:16.04
+```
 - Install conda from https://docs.continuum.io/anaconda/. Put conda executable in the PATH
 - `conda update conda`
 - `conda init`
