@@ -26,8 +26,10 @@ docker run -it --name ubuntu_16_04_slm_lab -e DISPLAY=${DISPLAY} -v /tmp/.X11-un
 - `conda activate lab`
 - `pip install future`
 
-Then, the demo example will run:
-`python run_lab.py slm_lab/spec/demo.json dqn_cartpole dev`
+Demo examples:
+- `python `
+- `python run_lab.py slm_lab/spec/demo.json dqn_cartpole dev`
+- `python run_lab.py slm_lab/spec/experimental/ppo/ppo_eps_search.json ppo_breakout dev`
 
 Note: You need Ubuntu 16.04. This will not work on Ubuntu 14.04, or 18.04. Nor on Centos 7.
 
