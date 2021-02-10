@@ -22,6 +22,7 @@ docker run -it --name ubuntu_16_04_slm_lab -e DISPLAY=${DISPLAY} -v /tmp/.X11-un
 - `git clone https://github.com/andrei-radulescu-banu/SLM-Lab.git`
 - `cd SLM-Lab/`
 - `./bin/setup`
+- `conda install tensorflow`
 - `conda activate lab`
 - `pip install future`
 
