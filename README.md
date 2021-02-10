@@ -26,10 +26,11 @@ docker run -it --name ubuntu_16_04_slm_lab -e DISPLAY=${DISPLAY} -v /tmp/.X11-un
 - `conda activate lab`
 - `pip install future`
 
-Demo examples:
-- `python `
+Examples:
+- `python andrei/reinforce.py `
 - `python run_lab.py slm_lab/spec/demo.json dqn_cartpole dev`
 - `python run_lab.py slm_lab/spec/experimental/ppo/ppo_eps_search.json ppo_breakout dev`
+- In general, `python run_lab.py {spec_file} {spec_name} {lab_mode}`, where lab_mode can be `dev|train|search|enjoy@saved_agent`. See Sec. 11.3.1 in the book.
 
 Note: You need Ubuntu 16.04. This will not work on Ubuntu 14.04, or 18.04. Nor on Centos 7.
 
