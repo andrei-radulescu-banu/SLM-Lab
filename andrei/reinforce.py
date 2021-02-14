@@ -34,8 +34,8 @@ class Pi(nn.Module):
         action = pd.sample() # get sample pi(a|s)
         log_prob = pd.log_prob(action) # get log_prob sample of pi(a|s)
         self.log_probs.append(log_prob) # append to array of log_prob samples
-        return action.item()
-
+        return action.item() # return the action sample
+    
 def train(pi, optimizer):
     # Inner gradient-ascent loop of REINFORCE algorithm
     T = len(pi.rewards)
@@ -60,17 +60,17 @@ def main():
     out_dim = env.action_space.n # 2 actions in cartpole env
     pi = Pi(in_dim, out_dim) # NN estimates policy pi_theta for REINFORCE
     optimizer = optim.Adam(pi.parameters(), lr=0.01) # sets learning rate
-    for epi in range(300):
+    for epi in range(300): # will execute 300 trajectories
         state = env.reset() # reset the gym environment
-        for t in range(200): # cartpole max timestep is 200
-            action = pi.act(state) # estimate the action
-            state, reward, done, _ = env.step(action) # set the gym action, get the reward, the new state, and see if we're done
+        for t in range(200): # trajectory will have 200 steps; cartpole max timestep is 200
+            action = pi.act(state) # act based on state; this also saves log_prob sample of pi(a|s)
+            state, reward, done, _ = env.step(action) # set gym action, get the reward, the new state, and see if pole fell down
             pi.rewards.append(reward) # save the reward
             env.render()
             if done:
                 break
-        loss = train(pi, optimizer) # train per episode
-        total_reward = sum(pi.rewards)
+        loss = train(pi, optimizer) # train based on this trajectory, and based on saved rewards and log_prob samples 
+        total_reward = sum(pi.rewards) 
         solved = total_reward > 195.0
         pi.onpolicy_reset() # onpolicy: clear memory after training
         print(f'Episode {epi}, loss {loss}, total_reward {total_reward}, solved {solved}')
