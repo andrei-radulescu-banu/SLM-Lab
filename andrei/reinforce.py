@@ -59,7 +59,7 @@ def main():
     in_dim = env.observation_space.shape[0] # 4
     out_dim = env.action_space.n # 2
     pi = Pi(in_dim, out_dim) # policy pi_theta for REINFORCE
-    optimizer = optim.Adam(pi.parameters(), lr=0.01)
+    optimizer = optim.Adam(pi.parameters(), lr=0.01) # sets learning rate
     for epi in range(300):
         state = env.reset()
         for t in range(200): # cartpole max timestep is 200
