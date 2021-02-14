@@ -47,7 +47,7 @@ def train(pi, optimizer):
         rets[t] = future_ret
     rets = torch.tensor(rets)
     log_probs = torch.stack(pi.log_probs)
-    loss = log_probs * rets # gradient term: Negative for maximizing
+    loss = - log_probs * rets # gradient term: negative for maximizing
     loss = torch.sum(loss)
     optimizer.zero_grad() # zero out old gradients
     loss.backward() # backpropagate, compute gradients of current tensor w.r.t. graph leaves
