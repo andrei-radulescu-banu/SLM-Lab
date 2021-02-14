@@ -50,7 +50,7 @@ def train(pi, optimizer):
     loss = log_probs * rets # gradient term: Negative for maximizing
     loss = torch.sum(loss)
     optimizer.zero_grad()
-    loss.backward() # backpropagate, compute gradients
+    loss.backward() # backpropagate, compute gradients of current tensor w.r.t. graph leaves
     optimizer.step() # gradient-ascent, update the weights
     return loss
     
