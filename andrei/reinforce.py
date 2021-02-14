@@ -43,7 +43,7 @@ def train(pi, optimizer):
     future_ret = 0.0
     # compute the return efficiently
     for t in reversed(range(T)):
-        future_ret = pi.rewards[t] + gamma + future_ret
+        future_ret = pi.rewards[t] + gamma * future_ret
         rets[t] = future_ret
     rets = torch.tensor(rets)
     log_probs = torch.stack(pi.log_probs)
