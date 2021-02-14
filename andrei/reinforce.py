@@ -29,11 +29,11 @@ class Pi(nn.Module):
 
     def act(self, state):
         x = torch.from_numpy(state.astype(np.float32)) # to tensor
-        pdparam = self.forward(x) # forward pass
-        pd = Categorical(logits=pdparam) # probability distribution
-        action = pd.sample() # pi(a|s) in action via pd
-        log_prob = pd.log_prob(action) # log_prob of pi(a|s)
-        self.log_probs.append(log_prob)
+        pdparam = self.forward(x) # forward pass estimates pi(a|s)
+        pd = Categorical(logits=pdparam) # pd is probability distribution of pi(a|s)
+        action = pd.sample() # get sample pi(a|s)
+        log_prob = pd.log_prob(action) # get log_prob sample of pi(a|s)
+        self.log_probs.append(log_prob) # append to array of log_prob samples
         return action.item()
 
 def train(pi, optimizer):
