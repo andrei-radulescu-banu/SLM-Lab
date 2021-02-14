@@ -11,9 +11,9 @@ class Pi(nn.Module):
     def __init__(self, in_dim, out_dim):
         super(Pi, self).__init__()
         layers = [
-            nn.Linear(in_dim, 64),
+            nn.Linear(in_dim, 64), # in_dim number of input states, 64 nodes wide middle layer
             nn.ReLU(),
-            nn.Linear(64, out_dim),
+            nn.Linear(64, out_dim), # out_dim number of output actions
         ]
         self.model = nn.Sequential(*layers)
         self.onpolicy_reset()
@@ -28,7 +28,7 @@ class Pi(nn.Module):
         return pdparam
 
     def act(self, state):
-        x = torch.from_numpy(state.astype(np.float32)) # to tensor
+        x = torch.from_numpy(state.astype(np.float32)) # state expressed as tensor
         pdparam = self.forward(x) # forward pass estimates pi(a|s)
         pd = Categorical(logits=pdparam) # pd is probability distribution of pi(a|s)
         action = pd.sample() # get sample pi(a|s)
@@ -49,7 +49,7 @@ def train(pi, optimizer):
     log_probs = torch.stack(pi.log_probs)
     loss = log_probs * rets # gradient term: Negative for maximizing
     loss = torch.sum(loss)
-    optimizer.zero_grad()
+    optimizer.zero_grad() # zero out old gradients
     loss.backward() # backpropagate, compute gradients of current tensor w.r.t. graph leaves
     optimizer.step() # gradient-ascent, update the weights
     return loss
