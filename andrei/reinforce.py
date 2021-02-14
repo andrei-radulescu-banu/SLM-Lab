@@ -56,16 +56,16 @@ def train(pi, optimizer):
     
 def main():
     env = gym.make("CartPole-v0")
-    in_dim = env.observation_space.shape[0] # 4
-    out_dim = env.action_space.n # 2
-    pi = Pi(in_dim, out_dim) # policy pi_theta for REINFORCE
+    in_dim = env.observation_space.shape[0] # 4 states in cartpole env
+    out_dim = env.action_space.n # 2 actions in cartpole env
+    pi = Pi(in_dim, out_dim) # NN estimates policy pi_theta for REINFORCE
     optimizer = optim.Adam(pi.parameters(), lr=0.01) # sets learning rate
     for epi in range(300):
-        state = env.reset()
+        state = env.reset() # reset the gym environment
         for t in range(200): # cartpole max timestep is 200
-            action = pi.act(state)
-            state, reward, done, _ = env.step(action)
-            pi.rewards.append(reward)
+            action = pi.act(state) # estimate the action
+            state, reward, done, _ = env.step(action) # set the gym action, get the reward, the new state, and see if we're done
+            pi.rewards.append(reward) # save the reward
             env.render()
             if done:
                 break
