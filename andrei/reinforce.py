@@ -66,14 +66,14 @@ def main():
             action = pi.act(state) # act based on state; this also saves log_prob sample of pi(a|s)
             state, reward, done, _ = env.step(action) # set gym action, get the reward, the new state, and see if pole fell down
             pi.rewards.append(reward) # save the reward
-            env.render()
+            env.render() # render the new cartpole state
             if done:
-                break
+                break # pole fell down, no need to continue to the end of the trajectory
         loss = train(pi, optimizer) # train based on this trajectory, and based on saved rewards and log_prob samples 
-        total_reward = sum(pi.rewards) 
-        solved = total_reward > 195.0
+        episode_reward = sum(pi.rewards) 
+        solved = episode_reward > 195.0
         pi.onpolicy_reset() # onpolicy: clear memory after training
-        print(f'Episode {epi}, loss {loss}, total_reward {total_reward}, solved {solved}')
+        print(f'Episode {epi}, loss {loss}, episode_reward {episode_reward}, solved {solved}')
     
 if __name__ == '__main__':
     main()
